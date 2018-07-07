@@ -1,5 +1,6 @@
 const express=require('express');
 const route=require('./routes/route.js')
+const profile=require('./routes/profile.js')
 const mongoose=require('mongoose');
 const passport=require('passport');
 const google=require('./config/google.js')
@@ -21,7 +22,8 @@ app.use(cookie({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(route)
+app.use(route);
+app.use(profile);
 
 
 app.listen(3000,function(){

@@ -16,7 +16,11 @@ res.render('all');
 route.get('/google',passport.authenticate('google',{scope:['profile']}));
 
 route.get('/google/redirect',passport.authenticate('google'),function(req,res){
-  console.log('reached');
+
+
+
+    res.redirect('/profile/:id');
+
 })
 
 //post request
@@ -28,6 +32,6 @@ new user({
 res.render('user',{user:use});
 })
 
-})
+});
 
 module.exports=route;
