@@ -24,12 +24,23 @@ route.get('/profile/:id',auth,function(req,res){
 });
 
 route.get('/profileview/:sd',auth,url,function(req,res){
+proj.find({pid:req.params.sd}).then(function(ques){
+user.findOne({Eid:req.params.sd}).then(function(use){
+    res.render('front',{use:use,ques:ques,sign:req.user});
+})
+
+
+});
+
+})
+
+
+route.get('/profilecheck/:sd',auth,url,function(req,res){
 proj.find({pid:req.user.Eid}).then(function(ques){
   res.render('front',{use:req.user,ques:ques});
 })
 
 })
-
 route.post('/publish',url,function(req,res){
 new proj({
 "pname":req.body.contentname,"pid":req.user.Eid,"github":req.body.git,"Lang":req.body.lang,"content":req.body.cont,"upvote":'',"downvote":'',"proid":Math.floor(Math.random()*100000)

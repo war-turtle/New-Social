@@ -221,6 +221,7 @@
 
         </ul>
     </div>
+    <a href="/logout">Logout</a>
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -255,7 +256,7 @@
 <div class="col-sm-4">
   <form method="post" action="/upvote">
     <input type="text" v-bind:value="x.pro" v-show="sh" name="project">
-    <input type="text" v-bind:value="x.pid" v-show="sh" name="client">
+    <input type="text" v-bind:value="signed" v-show="sh" name="client">
 
 <button  type="submit" class="btn btn-primary">upvotes {{x.upvote}}</button>
 </form>
@@ -264,7 +265,7 @@
 <div class="col-sm-4">
   <form method="post" action="/downvote">
     <input type="text" v-bind:value="x.pro" v-show="sh" name="project">
-    <input type="text" v-bind:value="x.pid" v-show="sh" name="client">
+    <input type="text" v-bind:value="signed" v-show="sh" name="client">
 
   <button  type="submit" class="btn btn-primary">Downvote{{x.downvote}}</button>
   </form>
@@ -633,9 +634,10 @@ if(contentname == "" || content == "" || genre == "" || tagline == ""){
 new Vue({
 el:"#ques",
 data:{
+  signed:'<%=sign.Eid%>',
 sh:false,
   ques:[<% ques.forEach(function(x){ %>
-    {git:'<%=x["github"] %>',content:'<%=x["content"].substr(3,x["content"].length-7)%>',pid:'<%=x["pid"]%>',upvote:'<%=x["upvote"].length%>',downvote:'<%=x["downvote"].length%>',pname:'<%= x["pname"] %>',pro:"<%=x['proid']%>"},
+    {git:'<%=x["github"] %>',content:'<%=x["content"].substr(3,x["content"].length-7)%>',pid:'<%=x["pid"]%>',upvote:'<%=x["upvote"].length%>',downvote:'<%=x["downvote"].length%>',pname:'<%= x["pname"] %>',pro:"<%=x['proid']%>",lang:'<%=x["Lang"]%>'   },
   <% }) %>]
 },
 methods:{

@@ -34,4 +34,9 @@ res.render('user',{user:use});
 
 });
 
+route.get('/logout',function(req,res){
+  req.logout();
+  res.redirect('/');
+})
+
 module.exports=route;
