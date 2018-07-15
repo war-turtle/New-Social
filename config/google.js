@@ -28,6 +28,7 @@ passport.use(
           new user({
             fname: pro.name.givenName,
             lname: pro.name.familyName,
+            username: pro.name.givenName + ' ' + pro.name.familyName,
             Eid: pro.id
           })
             .save()
