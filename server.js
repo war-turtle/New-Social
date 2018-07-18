@@ -8,12 +8,14 @@ const cookie = require('cookie-session');
 const url = require('body-parser').urlencoded({ extended: false });
 
 const User = require('./schema/user');
+const Project = require('./schema/project');
 
 require('./config/google');
 require('./config/local');
 
+//mongodb://uphaar:caped23@ds121461.mlab.com:21461/codeuino
 mongoose.connect(
-  'mongodb://uphaar:caped23@ds121461.mlab.com:21461/codeuino',
+  'mongodb://war-turtle:war1turtle@ds131721.mlab.com:31721/trial',
   function() {
     console.log('connected');
   }
@@ -38,9 +40,19 @@ app.post('/autocomplete', url, (req, res) => {
     res.send('');
   } else {
     let regex = new RegExp(req.body.value, 'i');
-    User.find({ username: regex }, (err, user) => {
-      res.send(user);
-    });
+    let item = req.body.item;
+    let query = {};
+    query[item] = regex;
+
+    if (req.body.item == 'pname') {
+      Project.find(query, (err, project) => {
+        res.send(project);
+      });
+    } else if (req.body.item == 'username' || req.body.item == 'email') {
+      User.find(query, (err, user) => {
+        res.send(user);
+      });
+    }
   }
 });
 

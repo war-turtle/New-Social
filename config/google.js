@@ -29,6 +29,7 @@ passport.use(
             fname: pro.name.givenName,
             lname: pro.name.familyName,
             username: pro.name.givenName + ' ' + pro.name.familyName,
+            email: pro.emails[0].value,
             Eid: pro.id
           })
             .save()

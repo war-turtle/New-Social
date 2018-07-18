@@ -11,7 +11,10 @@ route.get('/', function(req, res) {
   res.render('all');
 });
 
-route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+route.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
 route.get('/google/redirect', passport.authenticate('google'), function(
   req,
